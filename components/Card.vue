@@ -1,5 +1,5 @@
 <template>
-  <div class="column">
+  <div class="column wrapper">
     <div class="card">
       <header class="card-header">
         <p class="card-header-title has-text-grey">
@@ -7,13 +7,8 @@
         </p>
       </header>
       <div class="card-content">
-        <div class="content has-text-centered">
-          <b-icon
-            :icon="icon"
-            size="is-large"
-            type="is-primary"
-          />
-        </div>
+        <img :src="imgUrl" :alt="imgUrl" type="is-primary" />
+        <div class="content has-text-centered"></div>
       </div>
       <footer class="card-footer">
         <div class="card-footer-item">
@@ -31,12 +26,20 @@ export default {
   props: {
     title: {
       type: String,
-      required: true
+      required: true,
     },
-    icon: {
+    imgUrl: {
       type: String,
-      required: true
-    }
-  }
-}
+      required: true,
+    },
+  },
+};
 </script>
+
+<style >
+img {
+  width: 200px;
+  max-height: 130px;
+  object-fit: contain;
+}
+</style>
