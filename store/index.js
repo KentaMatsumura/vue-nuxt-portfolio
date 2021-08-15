@@ -73,6 +73,33 @@ const getters = {
   },
   getHobbies(state) {
     return state.hobbies;
+  },
+  getComics(state) {
+    let comics = [];
+    state.hobbies.forEach(hobby => {
+      if (hobby["type"] === 0) {
+        comics.push(hobby);
+      }
+    });
+    return comics;
+  },
+  getMusics(state) {
+    let musics = [];
+    state.hobbies.forEach(hobby => {
+      if (hobby["type"] === 1) {
+        musics.push(hobby);
+      }
+    });
+    return musics;
+  },
+  getMovies(state) {
+    let movies = [];
+    state.hobbies.forEach(hobby => {
+      if (hobby["type"] === 2) {
+        movies.push(hobby);
+      }
+    });
+    return movies;
   }
 };
 
