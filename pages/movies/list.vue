@@ -1,6 +1,10 @@
 <template>
   <section class="section">
-    <div class="columns is-mobile" v-if="this.$store.getters.getHobbies.length">
+    <div
+      class="columns is-mobile"
+      v-if="this.$store.getters.getHobbies.length"
+      v-show="!this.$store.getters.loading"
+    >
       <div v-for="hobby in this.$store.getters.getMovies" v-bind:key="hobby">
         <card
           :title="hobby['name']"
@@ -11,8 +15,11 @@
         </card>
       </div>
     </div>
-    <div v-else>
+    <div v-else v-show="!this.$store.getters.loading">
       <p>No Data</p>
+    </div>
+    <div v-show="this.$store.getters.loading">
+      <p>loagind</p>
     </div>
   </section>
 </template>
