@@ -2,7 +2,11 @@
   <section class="section">
     <div class="columns is-mobile">
       <div v-for="hobby in this.$store.getters.getHobbies" v-bind:key="hobby">
-        <card :title="hobby['name']" icon="cellphone-link">
+        <card
+          :title="hobby['name']"
+          :imgUrl="hobby['imgUrl']"
+          :type="hobby['type']"
+        >
           <b class="has-text-grey"> </b>{{ hobby["subText"] }}
         </card>
       </div>
@@ -18,13 +22,6 @@ export default {
   components: {
     Card,
   },
-  methods: {
-    getHobbies() {
-      this.$store.dispatch("fetchHobbies");
-    },
-  },
-  created: function () {
-    this.$store.dispatch("readHobbies");
-  },
+  methods: {},
 };
 </script>

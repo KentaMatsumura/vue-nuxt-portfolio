@@ -3,7 +3,8 @@ import firebase from "~/plugins/firebase";
 const state = {
   userUid: "",
   userName: "",
-  hobbies: []
+  hobbies: [],
+  loading: true
 };
 
 const mutations = {
@@ -15,11 +16,20 @@ const mutations = {
   },
   setHobbies(state, hobbies) {
     state.hobbies = hobbies;
+  },
+  setLoading(state, loading) {
+    state.loading = loading;
   }
 };
 
 const actions = {
-  login({ commit }) {
+  async startLoad(context) {
+    context.commit("setLoading", true);
+  },
+  async endLoad(context) {
+    context.commit("setLoading", false);
+  },
+  async login({ commit }) {
     console.log("LOGIN");
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase
@@ -35,7 +45,7 @@ const actions = {
         console.log("error: " + error.code);
       });
   },
-  logout({ commit }) {
+  async logout({ commit }) {
     console.log("LOGOUT");
     firebase
       .auth()
@@ -48,7 +58,7 @@ const actions = {
         console.log("error: " + error.code);
       });
   },
-  readHobbies({ commit }) {
+  async readHobbies({ commit }) {
     const db = firebase.firestore();
     let hobbies = [];
     db.collection("hobbies").onSnapshot(async querySnapshot => {
@@ -73,7 +83,35 @@ const getters = {
   },
   getHobbies(state) {
     return state.hobbies;
-  }
+  },
+  getComics(state) {
+    let comics = [];
+    state.hobbies.forEach(hobby => {
+      if (hobby["type"] === 0) {
+        comics.push(hobby);
+      }
+    });
+    return comics;
+  },
+  getMusics(state) {
+    let musics = [];
+    state.hobbies.forEach(hobby => {
+      if (hobby["type"] === 1) {
+        musics.push(hobby);
+      }
+    });
+    return musics;
+  },
+  getMovies(state) {
+    let movies = [];
+    state.hobbies.forEach(hobby => {
+      if (hobby["type"] === 2) {
+        movies.push(hobby);
+      }
+    });
+    return movies;
+  },
+  loading: state => (state.loading ? state.loading : "")
 };
 
 export default {

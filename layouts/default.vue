@@ -26,6 +26,26 @@ export default {
   components: {
     NavBar,
   },
+  methods: {
+    async getPost() {
+      await this.$store.dispatch("readHobbies");
+    },
+  },
+  // created: function () {
+  //   this.$store.dispatch("readHobbies");
+  // },
+  computed: {
+    loading() {
+      return this.$store.getters.loading;
+    },
+  },
+  mounted() {
+    console.log("mounted start");
+    this.$store
+      .dispatch("startLoad") //ローディング開始をする　loading = true;
+      .then(() => this.getPost()) //getPost()メソッドを開始
+      .then(() => this.$store.dispatch("endLoad")); //ローディング終了 loading = false;
+  },
   data() {
     return {
       items: [
