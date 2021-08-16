@@ -22,13 +22,6 @@ export default {
   components: {
     Card,
   },
-  methods: {
-    getHobbies() {
-      this.$store.dispatch("fetchHobbies");
-    },
-  },
-  created: function () {
-    this.$store.dispatch("readHobbies");
-  },
+  methods: {},
 };
 </script>

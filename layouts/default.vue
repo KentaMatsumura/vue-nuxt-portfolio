@@ -26,6 +26,9 @@ export default {
   components: {
     NavBar,
   },
+  created: function () {
+    this.$store.dispatch("readHobbies");
+  },
   data() {
     return {
       items: [

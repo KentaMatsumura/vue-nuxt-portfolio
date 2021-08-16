@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <div class="columns is-mobile">
+    <div class="columns is-mobile" v-if="this.$store.getters.getHobbies.length">
       <div v-for="hobby in this.$store.getters.getMovies" v-bind:key="hobby">
         <card
           :title="hobby['name']"
@@ -10,6 +10,9 @@
           <b class="has-text-grey"> </b>{{ hobby["subText"] }}
         </card>
       </div>
+    </div>
+    <div v-else>
+      <p>No Data</p>
     </div>
   </section>
 </template>
